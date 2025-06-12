@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #415385;
+  --color-primary-text: #415385;
+  --color-background: #f3f3f3;
+  --color-container: #ffffff;
+  --color-container-alt: #f3f3f3;
+  --color-excel: #2c8646;
+  --color-error: #c52a1a;
+  --spacing-content: calc(100vh - 4rem);
+  --spacing-nav: 4.5rem;
+  --spacing-gap: 12px;
+  --container-1: 1px;
+  --color-highlight: rgba(0, 0, 0, 0.05);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+  --color-primary-text: #9aa4be;
+  --color-background: #191919;
+  --color-container: #252525;
+  --color-container-alt: #3b3b3b;
+  --color-highlight: rgba(255, 255, 255, 0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.expanded {
+  --spacing-nav: 17.5rem;
+}
+
+@layer base {
+  button,
+  a {
+    @apply cursor-pointer transition-colors duration-300 rounded-lg;
+  }
+
+  h1 {
+    @apply text-4xl font-medium;
+  }
+
+  p {
+    @apply max-w-6xl;
+  }
+
+  ul,
+  ol {
+    @apply list-inside ps-10;
+  }
+
+  ul {
+    @apply list-decimal;
+  }
+
+  ol {
+    @apply list-disc;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  [data-tooltip] {
+    @apply relative;
+
+    &:hover {
+      @apply before:absolute before:h-9 before:px-2 before:text-nowrap before:grid before:place-content-center before:rounded-lg;
+      @apply before:bg-[#d1d1d1] before:text-black before:content-[attr(data-tooltip)] before:text-sm before:left-[calc(100%+8px)];
+    }
+  }
 }
