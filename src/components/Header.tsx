@@ -8,8 +8,9 @@ export default function Header() {
   const { data: session } = useSession();
   const pathname = usePathname();
 
-  if (!session && pathname !== "/api/auth/signin") {
-    redirect("/api/auth/signin");
+  if (!session && pathname !== "/auth/signin") {
+    sessionStorage.setItem("redirectTo", pathname);
+    redirect("/auth/signin");
   }
 
   return (

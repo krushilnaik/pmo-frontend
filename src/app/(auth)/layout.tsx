@@ -1,10 +1,7 @@
-import "./globals.css";
+import "../globals.css";
 
 import type { Metadata } from "next";
-
-import SessionProvider from "../components/SessionProvider";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
+import { SessionProvider } from "@/components";
 import { getServerSession } from "next-auth";
 
 export const metadata: Metadata = {
@@ -19,11 +16,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html lang="en" className="dark">
       <body className="bg-background text-black dark:text-white">
         <SessionProvider session={session}>
-          <Header />
-          <main className="grid grid-cols-[auto_1fr] max-h-content overflow-hidden">
-            <Navbar />
-            {children}
-          </main>
+          <main className="grid grid-cols-2 w-screen h-screen">{children}</main>
         </SessionProvider>
       </body>
     </html>
